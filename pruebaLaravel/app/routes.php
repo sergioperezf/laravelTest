@@ -11,7 +11,24 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+
+/*
+ * login route
+ */
+Route::any("/", [
+ "as"   => "user/login",
+ "uses" => "UserController@login"
+]);
+
+Route::any("/profile", [
+  "as"   => "user/profile",
+  "uses" => "UserController@profile"
+]);
+Route::any("/edit", [
+  "as"   => "user/edit",
+  "uses" => "UserController@edit"
+]);
+Route::any("/logout", [
+  "as"   => "user/logout",
+  "uses" => "UserController@logout"
+]);
