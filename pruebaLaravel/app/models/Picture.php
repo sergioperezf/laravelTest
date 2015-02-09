@@ -13,6 +13,9 @@ class Picture extends Eloquent {
         return $query->where('user_id', '=', $userId);
     }
 
+    /*
+     * deletion is safe and intelligent.
+     */
     public static function boot() {
         parent::boot();
         static::deleting(function($picture) {

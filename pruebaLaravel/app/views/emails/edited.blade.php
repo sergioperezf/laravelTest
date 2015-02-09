@@ -10,7 +10,12 @@ Name: {{$user->name}}<br/>
 Lastname: {{$user->lastname}}<br/>
 Phone: {{$user->phone}}<br/>
 Birthday: {{$user->birthday}}<br/>
-Picture: <br/> <img style="width: 200px" src="<?php echo $message->embed(public_path(Picture::find($user->picture_id)->path)); ?>">
+Picture: @if(Picture::find($user->picture_id))
+<br/> 
+<img style="width: 200px" src="<?php echo $message->embed(public_path(Picture::find($user->picture_id)->path)); ?>">
+@else
+Not set
+@endif
 <br/>
 <br/>
 Best regards,

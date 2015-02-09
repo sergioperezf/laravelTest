@@ -44,6 +44,7 @@
 
 <script>
     $(function () {
+        //reloads the pictures from the returned data, from the ajax call
         reloadFromServer = function (data) {
             if (data.status === 'OK') {
                 $('#picture')
@@ -59,10 +60,13 @@
                     }
                 });
             } else if (data.status === 'FAILED') {
+                //alerts the message
                 alert(data.message)
             }
             setForAddition();
         }
+        
+        //sends the file to the server via ajax.
         uploadFile = function () {
             var formData = new FormData($('#fileForm')[0]);
             $.ajax({
@@ -75,20 +79,23 @@
                 success: reloadFromServer
             });
         };
-
-
+        
+        //deletes selected pictures from server
         deleteSelected = function () {
             var formData = new FormData($('#mainForm')[0]);
             $.ajax({
                 type: "POST",
                 contentType: false,
                 processData: false,
+                //do not reformat. formatting messes up the route
                 url: "{{URL::route("picture/delete")}}",
                 data: formData,
                 dataType: 'json',
                 success: reloadFromServer
             });
         }
+        
+        //updates the masonry and imagepicker plugins
         updateImages = function () {
             $("#picture").imagepicker();
             var container = jQuery("#picture").next("ul");
@@ -98,14 +105,17 @@
                     itemSelector: ".thumbnail"
                 });
             });
-        }
-        ;
+        };
+        
+        //enables multiple selection for deletion of pictures
         setForDeletion = function () {
             $("#addLink").hide()
             $("#delete").show()
             $("#picture").attr('multiple', 'multiple');
             updateImages()
         };
+        
+        //disables multiple selection of images
         setForAddition = function () {
             $("#addLink").show()
             $("#picture").removeAttr('multiple');
@@ -113,6 +123,8 @@
             $("#delete").hide()
         };
         updateImages();
+        
+        //datepicker with format
         $('#dp').datepicker({
             format: 'yyyy-mm-dd',
             todayBtn: 'linked'
