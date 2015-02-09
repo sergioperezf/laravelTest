@@ -28,6 +28,10 @@ Route::any("/edit", [
   "as"   => "user/edit",
   "uses" => "UserController@edit"
 ]);
+Route::post("/register", [
+  "as"   => "user/register",
+  "uses" => "UserController@register"
+]);
 Route::any("/logout", [
   "as"   => "user/logout",
   "uses" => "UserController@logout"
@@ -39,4 +43,8 @@ Route::post("/uploadimage", [
 Route::post("/deleteimage", [
   "as"   => "picture/delete",
   "uses" => "PictureController@delete"
+]);
+Route::get("/delete/{id}", [
+  "as"   => "user/delete",
+  "uses" => "UserController@delete"
 ]);

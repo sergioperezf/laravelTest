@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration {
             $table->string("phone")->nullable();
             $table->date("birthday")->nullable();
             $table->integer('picture_id')->unsigned()->nullable();
-            $table->foreign('picture_id')->references('id')->on('pictures');
             $table->string("remember_token")->nullable();
             $table->timestamps();
         });

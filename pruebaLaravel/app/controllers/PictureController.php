@@ -8,7 +8,7 @@ class PictureController extends Controller {
             try {
                 $file = Input::file('file');
                 $validator = $this->getFileValidator();
-                if(!$validator->passes()){
+                if (!$validator->passes()) {
                     throw new Exception('File must be an image');
                 }
                 $assetPath = '/uploads/images';

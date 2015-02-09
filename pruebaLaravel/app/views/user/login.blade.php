@@ -5,13 +5,13 @@
     <div class="panel panel-info" >
         <div class="panel-heading">
             <div class="panel-title">Log In</div>
-            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div>    
         <div style="padding-top:30px" class="panel-body" >
+            {{ Form::open() }}
             <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 {{ Form::text("username", null, array('class'=>'form-control', 'placeholder'=>'Email')) }}
-                <?php // echo $this->formElement($form->get('username')); ?>
             </div>
             <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -19,12 +19,13 @@
             </div>
             <div style="margin-top:10px" class="form-group">
                 <div class="col-sm-12 controls">
-                    {{ Form::submit("login") }}
+                    {{ Form::submit("Login", array('class' => 'btn btn-success')) }}
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-12 control">
-                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                    <hr/>
+                    <div style=" padding-top:15px; font-size:85%" >
                         Don't have an account! 
                         <a href="#" onClick="$('#loginbox').hide();
                                 $('#signupbox').show()">
@@ -46,54 +47,35 @@
                     $('#loginbox').show()">Log In</a></div>
         </div>  
         <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form">
-                <div id="signupalert" style="display:none" class="alert alert-danger">
-                    <p>Error:</p>
-                    <span></span>
+            {{ Form::open(array('action' => 'UserController@register', 'class' => 'form-horizontal', 'role' => 'form')) }}
+            <div class="form-group">
+                <div class="col-md-12">
+                    {{ Form::text("username", null, array('class'=>'form-control', 'placeholder'=>'Username')) }}
                 </div>
-                <div class="form-group">
-                    <label for="email" class="col-md-3 control-label">Email</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" name="email" placeholder="Email Address">
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    {{ Form::text("email", null, array('class'=>'form-control', 'placeholder'=>'Email')) }}
                 </div>
-
-                <div class="form-group">
-                    <label for="firstname" class="col-md-3 control-label">First Name</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    {{ Form::password("password", array('class'=>'form-control', 'placeholder'=>'Password')) }}
                 </div>
-                <div class="form-group">
-                    <label for="lastname" class="col-md-3 control-label">Last Name</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    {{ Form::password("password_repeat", array('class'=>'form-control', 'placeholder'=>'Repeat password')) }}
                 </div>
-                <div class="form-group">
-                    <label for="password" class="col-md-3 control-label">Password</label>
-                    <div class="col-md-9">
-                        <input type="password" class="form-control" name="passwd" placeholder="Password">
-                    </div>
+            </div>
+            <div class="form-group">
+                <!-- Button -->                                        
+                <div class="col-md-offset-3 col-md-9">
+                    <input type="submit" id="btn-signup" class="btn btn-info" value="Register"/>
                 </div>
-
-
-                <div class="form-group">
-                    <!-- Button -->                                        
-                    <div class="col-md-offset-3 col-md-9">
-                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
-                    </div>
-                </div>
-            </form>
+            </div>
+            {{ Form::close() }}
         </div>
     </div>
 </div> 
-
-{{ Form::open() }}
-@if (isset($error))
-{{ $error }}<br />
-@endif
-@if (isset($success))
-{{ $success }}<br />
-@endif
 @stop

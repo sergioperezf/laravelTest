@@ -15,15 +15,20 @@
             <div class="container">
 
                 @if (Auth::check())
-                <a href="{{ URL::route("user/logout") }}">
-                    logout
-                </a>
+                <span style="float: right">
+                    <a href="{{ URL::route("user/logout") }}">
+                        Logout
+                    </a> | 
+                    <a href="{{ URL::route("user/delete", array('id'=>Auth::user()->id)) }}">
+                        Delete account
+                    </a>
+                </span>
                 @endif
                 @if (isset($error))
                 <div id="login-alert"  class="alert alert-danger col-sm-12">{{ $error }}</div>
                 @endif
                 @if (isset($success))
-                <div id="login-alert"  class="alert alert-success col-sm-12">{{ $error }}</div>
+                <div id="login-alert"  class="alert alert-success col-sm-12">{{ $success }}</div>
                 @endif
                 @yield("content")
             </div>

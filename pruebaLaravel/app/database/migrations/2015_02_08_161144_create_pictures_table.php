@@ -18,6 +18,9 @@ class CreatePicturesTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+        Schema::table('users', function(Blueprint $table) {
+            $table->foreign('picture_id')->references('id')->on('pictures');
+        });
     }
 
     /**

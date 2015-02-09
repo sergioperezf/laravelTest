@@ -2,8 +2,59 @@
 
 class UserController extends Controller {
 
+    public function register() {
+        if (!Auth::check()) {
+            $validator = $this->getRegisterValidator();
+            if ($validator->passes()) {
+                try {
+                    $data = $this->getRegisterData();
+//                    $theUser = User::create($data);
+                    $theUser = new User();
+                    $theUser->username = $data['username'];
+                    $theUser->email = $data['email'];
+                    $theUser->password = Hash::make($data['password']);
+                    $theUser->save();
+                    $data['success'] = 'New user registered succesfully';
+                } catch (Exception $e) {
+                    $data['error'] = 'An error occurred while trying to register user: ' . $e->getMessage();
+                }
+            } else {
+                $data['error'] = 'The form is not valid';
+            }
+            return Redirect::route("user/login")->with('data', $data);
+        }
+    }
+
+    public function delete($id) {
+        if (Auth::check()) {
+            $theUser = User::find($id);
+            $theUser->delete();
+            Auth::logout();
+
+            return Redirect::route("user/login")->with('data', array('success' => 'Deleted.'));
+        }
+    }
+
+    protected function getRegisterValidator() {
+        return Validator::make(Input::all(), [
+                    "username" => "required|alpha",
+                    "email" => "required|email",
+                    "password" => "required|alpha_num",
+                    "password_repeat" => "required|same:password"
+        ]);
+    }
+
+    protected function getRegisterData() {
+
+        return [
+            "email" => Input::get("email"),
+            "username" => Input::get("username"),
+            "password" => Input::get("password"),
+        ];
+    }
+
     public function login() {//TODO: make it so that refreshing (F5) the page does not resend the form.
-        $data = [];
+        $data = Session::get('data') ? Session::get('data') : [];
         if ($this->isPostRequest()) {
             $validator = $this->getLoginValidator();
 
@@ -59,6 +110,7 @@ class UserController extends Controller {
     protected function getUserDataValidator() {//todo: validate picture_id[] is numeric
         return Validator::make(Input::all(), [
                     'phone' => 'numeric',
+                    'birthday' => 'date_format:Y-m-d',
         ]);
     }
 
