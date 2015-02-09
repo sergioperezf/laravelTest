@@ -8,13 +8,15 @@ class UserController extends Controller {
             if ($validator->passes()) {
                 try {
                     $data = $this->getRegisterData();
-//                    $theUser = User::create($data);
                     $theUser = new User();
                     $theUser->username = $data['username'];
                     $theUser->email = $data['email'];
                     $theUser->password = Hash::make($data['password']);
                     $theUser->save();
                     $data['success'] = 'New user registered succesfully';
+                    Mail::send('emails.welcome', array('user' => $theUser), function($message) use ($theUser) {
+                        $message->to($theUser->email, $theUser->username)->subject('Welcome!');
+                    });
                 } catch (Exception $e) {
                     $data['error'] = 'An error occurred while trying to register user: ' . $e->getMessage();
                 }
@@ -26,13 +28,13 @@ class UserController extends Controller {
     }
 
     public function delete($id) {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->id == $id) {
             $theUser = User::find($id);
             $theUser->delete();
             Auth::logout();
-
             return Redirect::route("user/login")->with('data', array('success' => 'Deleted.'));
         }
+        return Redirect::route("user/login")->with('data', array('error' => 'Not allowed.'));
     }
 
     protected function getRegisterValidator() {
@@ -70,7 +72,7 @@ class UserController extends Controller {
             }
         }
         if (Auth::check()) {
-            return Redirect::route("user/profile");
+            return Redirect::route("user/profile")->with('data', $data);
         }
         return View::make("user/login", $data);
     }
@@ -115,8 +117,9 @@ class UserController extends Controller {
     }
 
     public function profile() {
+        $data = Session::get('data') ? Session::get('data') : [];
         if (Auth::check()) {
-            return View::make("user/profile");
+            return View::make("user/profile", $data);
         }
         return Redirect::route("user/login");
     }
@@ -138,6 +141,10 @@ class UserController extends Controller {
                     Auth::user()->picture_id = $userData['picture_id'];
                 }
                 Auth::user()->save();
+                $theUser = Auth::user();
+                Mail::send('emails.edited', array('user' => $theUser), function($message) use ($theUser) {
+                    $message->to($theUser->email, $theUser->username)->subject('Profile edited!');
+                });
                 return Redirect::route("user/profile");
             } else {
                 $data["error"] = "The form is invalid.";
