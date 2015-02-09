@@ -32,3 +32,11 @@ Route::any("/logout", [
   "as"   => "user/logout",
   "uses" => "UserController@logout"
 ]);
+Route::post("/uploadimage", [
+  "as"   => "picture/upload",
+  "uses" => "PictureController@upload"
+]);
+Route::post("/deleteimage", [
+  "as"   => "picture/delete",
+  "uses" => "PictureController@delete"
+]);

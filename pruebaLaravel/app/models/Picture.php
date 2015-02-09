@@ -1,7 +1,7 @@
 <?php
 
 
-class Pictures extends Eloquent {
+class Picture extends Eloquent {
 
 
 	/**
@@ -10,5 +10,9 @@ class Pictures extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'pictures';
+        
+        public function scopeOfUser($query, $userId){
+            return $query->where('user_id', '=', $userId);
+        }
 
 }

@@ -52,12 +52,13 @@ class UserController extends Controller {
             "lastname" => Input::get("lastname"),
             "phone" => Input::get("phone"),
             "birthday" => Input::get("birthday"),
+            "picture_id" => Input::get("picture_id")[0]
         ];
     }
 
-    protected function getUserDataValidator() {
+    protected function getUserDataValidator() {//todo: validate picture_id[] is numeric
         return Validator::make(Input::all(), [
-                    'phone' => 'numeric'
+                    'phone' => 'numeric',
         ]);
     }
 
@@ -70,17 +71,20 @@ class UserController extends Controller {
 
     public function edit() {
         $data = [];
-        if ($this->isPostRequest()) {
+        if ($this->isPostRequest() && Auth::check()) {
 
             $validator = $this->getUserDataValidator();
 
             if ($validator->passes()) {
                 $userData = $this->getUserData();
-//                die(var_export($userData, true));
                 Auth::user()->name = $userData['name'];
                 Auth::user()->lastname = $userData['lastname'];
                 Auth::user()->phone = $userData['phone'];
                 Auth::user()->birthday = $userData['birthday'];
+                $picture = Picture::find($userData['picture_id']);
+                if ($picture && Picture::find($userData['picture_id'])->user_id == Auth::user()->id) {
+                    Auth::user()->picture_id = $userData['picture_id'];
+                }
                 Auth::user()->save();
                 return Redirect::route("user/profile");
             } else {
@@ -88,6 +92,8 @@ class UserController extends Controller {
             }
         }
         if (Auth::check()) {
+            $pictures = Picture::ofUser(Auth::user()->id)->get();
+            $data['pictures'] = $pictures;
             return View::make("user/edit", $data);
         }
         return Redirect::route("user/login");
