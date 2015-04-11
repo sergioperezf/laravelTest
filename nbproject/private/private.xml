@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="PruebaLaravel">
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/config/database.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/database/migrations/2015_02_08_034205_create_users_table.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/models/User.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/database/seeds/DatabaseSeeder.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/config/app.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/bootstrap/start.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/config/auth.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/public/css/layout.css</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/routes.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/controllers/UserController.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/user/profile.blade.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/database/migrations/2015_02_08_161144_create_pictures_table.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/database/seeds/UserSeeder.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/models/Picture.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/user/edit.blade.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/index.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/header.blade.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/layout.blade.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/user/login.blade.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/public/assets/css/datepicker.css</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/public/assets/js/datepicker.js</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/controllers/PictureController.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/config/mail.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/config/local/app.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/emails/welcome.blade.php</file>
+            <file>file:/home/sergio/Documents/LaravelTest/pruebaLaravel/app/views/emails/edited.blade.php</file>
+        </group>
+    </open-files>
+</project-private>
